@@ -3,6 +3,8 @@ import userRoutes from './router/usersrouter.js'
 import authRoutes from './router/authrouter.js'
 import cors from 'cors'
 import dotenv from 'dotenv'
+import helmet from 'helmet'
+import xss from 'xss-clean'
 
 
 // createServer
@@ -13,6 +15,9 @@ dotenv.config()
 app.disable('x-powered-by') // "desactivando la cabecera x-powered-by"
 
 // ! Middlewares
+
+app.use(helmet())
+app.use(xss())
 // me permite recibir datos en formato json en el body de la solicitud
 app.use(json())
 app.use(cors({
